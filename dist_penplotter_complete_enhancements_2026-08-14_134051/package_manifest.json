@@ -1,0 +1,18 @@
+{
+    "package":  "dist_penplotter_complete_enhancements_2026-08-14_134051",
+    "created":  "2026-08-14T13:40:52",
+    "environment":  "mks_robin_nano_v1_3_f4",
+    "firmware":  "elegoo.bin",
+    "firmware_sha256":  "E366E1CF4ED5077AD5AAF2CE54DD0B8939B4BB87FE8A69575D69B96F651A83C3",
+    "firmware_size":  488908,
+    "bed_mm":  "200x200",
+    "notes":  [
+                  "Pen plotter only",
+                  "Z axis is pen lift",
+                  "Home X/Y before plotter actions",
+                  "Soft limits enabled",
+                  "M750 embedded demos",
+                  "M752 text writer",
+                  "M753 generated art"
+              ]
+}

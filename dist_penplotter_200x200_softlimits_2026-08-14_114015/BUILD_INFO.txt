@@ -1,0 +1,9 @@
+Neptune 2S / Robin Nano pen plotter firmware
+Built: 2026-08-14T11:40:15
+Target: mks_robin_nano_v1_3_f4
+Payload: elegoo.bin
+Work area: X200 Y200 with min/max software endstops enabled
+Pen lift: Z axis, up Z1.2 F900, down Z0 F900
+Embedded demos: 51 centered demos from neptune_n2s_penplotter/examples
+Live speed: LCD Speed screen or M751 S<percent>
+SHA256: D12B41881616459452016FCB59D84045250FC0B6411551E7B239355EAF2D1ECA

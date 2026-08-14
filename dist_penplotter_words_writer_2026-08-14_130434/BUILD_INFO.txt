@@ -1,0 +1,11 @@
+Neptune 2S / Robin Nano pen plotter firmware
+Built: 2026-08-14 13:04:35 -05:00
+Target: mks_robin_nano_v1_3_f4
+Bed: 200x200mm, software endstops enabled
+Pen lift: Z axis, up Z1.2, down Z0
+Text writer: touchscreen Words app and serial M752 F0..2 S<size> "TEXT"
+Text demos: M752 D1 HELLO PLOTTER, D2 MAKE ART, D3 NEVETS
+Embedded art demos: M750 D1..D51
+Action preflight: lift Z, home X/Y, then perform plotter motion
+Live speed: M751 S<percent> and LCD Speed screen, no rehome during speed change
+SHA256(elegoo.bin): D3586C6ABB4C29883F3450A3BFB3A197F366F40D6F85EB7C6BD9A63605B1FC00

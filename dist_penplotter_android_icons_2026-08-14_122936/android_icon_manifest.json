@@ -1,0 +1,352 @@
+[
+  {
+    "path": "assets/bmp_Add.bin",
+    "size": 32765,
+    "sha256": "F7CAEB472B193C640E583ABA49E1F2FDA772F2812B8CDC7634B22EE0428C0FAA"
+  },
+  {
+    "path": "assets/bmp_Dec.bin",
+    "size": 32765,
+    "sha256": "51EE8887C46E998D6A676083DB5541C337901CCD5306FC9DC02F6D763FC0B60E"
+  },
+  {
+    "path": "assets/bmp_back.bin",
+    "size": 21533,
+    "sha256": "988246BFD8E6615B9ED53F55E7D5C64C90B5E8B78977A2EB19297EB6C9D779E2"
+  },
+  {
+    "path": "assets/bmp_custom1.bin",
+    "size": 32765,
+    "sha256": "FFEB7F057B3431097C419EF6327DC311405DE02EF44072EAC6DF9E78746445FD"
+  },
+  {
+    "path": "assets/bmp_custom2.bin",
+    "size": 32765,
+    "sha256": "952D2064A43CD966353087B1D1A30E7B24CCB4E027C95C62A9C5A66F88F58728"
+  },
+  {
+    "path": "assets/bmp_custom3.bin",
+    "size": 32765,
+    "sha256": "BAC94517C5E9E9FDDFB85AE861D5C64C3545AB39C1B2856BD8FC9DC1446AD2DE"
+  },
+  {
+    "path": "assets/bmp_custom4.bin",
+    "size": 32765,
+    "sha256": "07174BA8317C9332A2C4E2FE79FC8F375DF1B38F3ABD28496E7222CD2F95E288"
+  },
+  {
+    "path": "assets/bmp_custom5.bin",
+    "size": 32765,
+    "sha256": "09176203C411F938C90819FE876439BC9780EE93CB8174CCA790F60D346B7B37"
+  },
+  {
+    "path": "assets/bmp_custom6.bin",
+    "size": 32765,
+    "sha256": "39B48429A812EC04CF7609D0917F993949AFE6C7A2B6B81FC2F3F9F3C4EA1C8C"
+  },
+  {
+    "path": "assets/bmp_custom7.bin",
+    "size": 32765,
+    "sha256": "CCE5EB17BE8EF849BA1B432C2D82D205536B4FF0D859661E330629895B4EB989"
+  },
+  {
+    "path": "assets/bmp_eeprom_settings.bin",
+    "size": 32765,
+    "sha256": "30302B3C5DB82968B5FE0A5626DADCE6F884690193F5750C75E4AC9E57F105F7"
+  },
+  {
+    "path": "assets/bmp_function1.bin",
+    "size": 32765,
+    "sha256": "FC8112648960AE6154FD030F752F6BC02CF07D31D79B28686FAB614EF58AEF6E"
+  },
+  {
+    "path": "assets/bmp_more.bin",
+    "size": 32765,
+    "sha256": "4287ED24E34676D3E1E926441A07D9E1B9D65C042E29CD86697A3183E35FFAB7"
+  },
+  {
+    "path": "assets/bmp_mov.bin",
+    "size": 32765,
+    "sha256": "26FB4CE4F1309587DE50BC444C76DCFFAA5231E277F0F3B561F375F932910BD2"
+  },
+  {
+    "path": "assets/bmp_mov_changeSpeed.bin",
+    "size": 32765,
+    "sha256": "26FB4CE4F1309587DE50BC444C76DCFFAA5231E277F0F3B561F375F932910BD2"
+  },
+  {
+    "path": "assets/bmp_mov_changespeed.bin",
+    "size": 32765,
+    "sha256": "26FB4CE4F1309587DE50BC444C76DCFFAA5231E277F0F3B561F375F932910BD2"
+  },
+  {
+    "path": "assets/bmp_mov_sel.bin",
+    "size": 32765,
+    "sha256": "26FB4CE4F1309587DE50BC444C76DCFFAA5231E277F0F3B561F375F932910BD2"
+  },
+  {
+    "path": "assets/bmp_move_opr.bin",
+    "size": 32765,
+    "sha256": "26FB4CE4F1309587DE50BC444C76DCFFAA5231E277F0F3B561F375F932910BD2"
+  },
+  {
+    "path": "assets/bmp_pageDown.bin",
+    "size": 21533,
+    "sha256": "3B64E488C6F385005F93F85FCD6799661B1F6A8B828FBFC863B922A700D895EA"
+  },
+  {
+    "path": "assets/bmp_pageUp.bin",
+    "size": 21533,
+    "sha256": "219A21944CA57A74C93E3D5A8911BE9D07B8893B0BB1EBD49749E36C4DF3040F"
+  },
+  {
+    "path": "assets/bmp_printing.bin",
+    "size": 32765,
+    "sha256": "1B254137A4F45E172D9986E29F2CE313FF297785B67C39CB810DA63F4B4D8697"
+  },
+  {
+    "path": "assets/bmp_return.bin",
+    "size": 32765,
+    "sha256": "5B9C96237B02F3B63E9B6E6E0B5F57FC17798976DFDCBF0D1BA51A45A57E5277"
+  },
+  {
+    "path": "assets/bmp_set.bin",
+    "size": 32765,
+    "sha256": "F6E924DE21DC5DD8FE11B81040B654BF4F391EDEFF2315DB847617F028187C3C"
+  },
+  {
+    "path": "assets/bmp_speed.bin",
+    "size": 32765,
+    "sha256": "F01006D676670E8BDE0CF7F5BA9B0227073CA3034BE327963C0D1ECC4C927C37"
+  },
+  {
+    "path": "assets/bmp_tool.bin",
+    "size": 32765,
+    "sha256": "81E1F2E89E10F965C8B6CDE427372102042E9845FF935E96328EB79EA82A751E"
+  },
+  {
+    "path": "assets/bmp_xAdd.bin",
+    "size": 32765,
+    "sha256": "C89B98AC5C3A86314293B34E596DD6561BA914AF7B536092DA5A9B980A619F9D"
+  },
+  {
+    "path": "assets/bmp_xDec.bin",
+    "size": 32765,
+    "sha256": "824CEBC96857454A5A6C771A7310EEAE8B994645162E0D27D0BDFA9BA5B5329B"
+  },
+  {
+    "path": "assets/bmp_yAdd.bin",
+    "size": 32765,
+    "sha256": "D3C9A3B5D58466C350AFBBB5F997DE24153C477BA9861E5250EB22F666C3D779"
+  },
+  {
+    "path": "assets/bmp_yDec.bin",
+    "size": 32765,
+    "sha256": "DFC9AC2A08ADD808E3AE22B37B9EAD86755AA100C086D0B8DC0FBFE402DFD04C"
+  },
+  {
+    "path": "assets/bmp_zAdd.bin",
+    "size": 32765,
+    "sha256": "B2B48A1BC62B17DFA72CFD7F790B9099170C82A42DF4C383A65C0FEFB6A4B05C"
+  },
+  {
+    "path": "assets/bmp_zDec.bin",
+    "size": 32765,
+    "sha256": "191D491D26E62301967FCE1726066667B0F349B1A6658B29A84B694B0115B0D2"
+  },
+  {
+    "path": "assets/bmp_zero.bin",
+    "size": 32765,
+    "sha256": "912CC6B321DB77706AC76F186A14DC4DB331E16A09D5DE822F2E4977782624C8"
+  },
+  {
+    "path": "assets/bmp_zeroAll.bin",
+    "size": 32765,
+    "sha256": "912CC6B321DB77706AC76F186A14DC4DB331E16A09D5DE822F2E4977782624C8"
+  },
+  {
+    "path": "assets/bmp_zeroX.bin",
+    "size": 32765,
+    "sha256": "C89B98AC5C3A86314293B34E596DD6561BA914AF7B536092DA5A9B980A619F9D"
+  },
+  {
+    "path": "assets/bmp_zeroY.bin",
+    "size": 32765,
+    "sha256": "D3C9A3B5D58466C350AFBBB5F997DE24153C477BA9861E5250EB22F666C3D779"
+  },
+  {
+    "path": "assets/bmp_zeroZ.bin",
+    "size": 32765,
+    "sha256": "B2B48A1BC62B17DFA72CFD7F790B9099170C82A42DF4C383A65C0FEFB6A4B05C"
+  },
+  {
+    "path": "elegoo_pic/bmp_Add.bin",
+    "size": 32760,
+    "sha256": "71BDFDB44210CED1E8FC420BE56BF825428F23873253B1B2EF406867F51AD984"
+  },
+  {
+    "path": "elegoo_pic/bmp_Dec.bin",
+    "size": 32760,
+    "sha256": "B9F26196469E3F31E81F531B7A9E9AA850AADDB0E90B6FB11570D2839F9CFBCE"
+  },
+  {
+    "path": "elegoo_pic/bmp_back.bin",
+    "size": 21528,
+    "sha256": "4E73C46B1B158EC508A276497ED8EBB3E55D2128F36F9BE7F30FBA13ADCC4B57"
+  },
+  {
+    "path": "elegoo_pic/bmp_custom1.bin",
+    "size": 32760,
+    "sha256": "B1F5FE9BC0ED462CB6E3C2182B89D08BEA23D8E7529A966F3F91B78B6799FF82"
+  },
+  {
+    "path": "elegoo_pic/bmp_custom2.bin",
+    "size": 32760,
+    "sha256": "4A6B749BB362B52F74CEFE838A7AC87EF5FC304C1D711B8071C615A6AFCE227B"
+  },
+  {
+    "path": "elegoo_pic/bmp_custom3.bin",
+    "size": 32760,
+    "sha256": "9F8F17EB030330A70948386E23A43AC679E0055B6020C6148FB39587CEE30792"
+  },
+  {
+    "path": "elegoo_pic/bmp_custom4.bin",
+    "size": 32760,
+    "sha256": "7548A5C848F951A67D2DFF1338169F714B619DA20129DF1A3949BF227723DDC7"
+  },
+  {
+    "path": "elegoo_pic/bmp_custom5.bin",
+    "size": 32760,
+    "sha256": "AA6D09EFB81C556614AA46C715F9A963E67E2163AAB0F99BB29645D9A926A601"
+  },
+  {
+    "path": "elegoo_pic/bmp_custom6.bin",
+    "size": 32760,
+    "sha256": "1D2442DAF7048D4C2C0A08ABF5851F3510E4FD739F3A9F8819F2C667AF33A63F"
+  },
+  {
+    "path": "elegoo_pic/bmp_custom7.bin",
+    "size": 32760,
+    "sha256": "00E4F97C35CC09849C16A097BB3E070B0339DA9039B42B1595C55DE02200DD52"
+  },
+  {
+    "path": "elegoo_pic/bmp_function1.bin",
+    "size": 32760,
+    "sha256": "0B366115BA76C276AECCF2A2259760E0D028DDEBF7E13AF5A6BB3102D9918611"
+  },
+  {
+    "path": "elegoo_pic/bmp_more.bin",
+    "size": 32760,
+    "sha256": "B849C14D815A374693867A07EAFFC072E4622F6ED94CB5C4AB140846FA82BF6E"
+  },
+  {
+    "path": "elegoo_pic/bmp_mov.bin",
+    "size": 32760,
+    "sha256": "72B6BCE293E1F160018FA43133E6244BA902B7747C6B4AAE334938215B61425C"
+  },
+  {
+    "path": "elegoo_pic/bmp_mov_changeSpeed.bin",
+    "size": 32760,
+    "sha256": "72B6BCE293E1F160018FA43133E6244BA902B7747C6B4AAE334938215B61425C"
+  },
+  {
+    "path": "elegoo_pic/bmp_mov_changespeed.bin",
+    "size": 32760,
+    "sha256": "72B6BCE293E1F160018FA43133E6244BA902B7747C6B4AAE334938215B61425C"
+  },
+  {
+    "path": "elegoo_pic/bmp_mov_sel.bin",
+    "size": 32760,
+    "sha256": "72B6BCE293E1F160018FA43133E6244BA902B7747C6B4AAE334938215B61425C"
+  },
+  {
+    "path": "elegoo_pic/bmp_move_opr.bin",
+    "size": 32760,
+    "sha256": "72B6BCE293E1F160018FA43133E6244BA902B7747C6B4AAE334938215B61425C"
+  },
+  {
+    "path": "elegoo_pic/bmp_pageDown.bin",
+    "size": 21528,
+    "sha256": "A89ED6F2122ED89F24A416903BA22C1C3E7D4E1B054F47E8BF745BE3593FF178"
+  },
+  {
+    "path": "elegoo_pic/bmp_pageUp.bin",
+    "size": 21528,
+    "sha256": "D1DACF6595877624E20C1BFA71EDCAE58253B4619CA0A15E61825C417299EF76"
+  },
+  {
+    "path": "elegoo_pic/bmp_printing.bin",
+    "size": 32760,
+    "sha256": "A05E6716FCA0E941C81248672CAEFF49240D105D6A4582FF0EB60E9EEFEDD7CC"
+  },
+  {
+    "path": "elegoo_pic/bmp_return.bin",
+    "size": 32760,
+    "sha256": "844BE33A96ED0625B717AB8D59F74D0826DA124D37E72F03B926BA7745A40C66"
+  },
+  {
+    "path": "elegoo_pic/bmp_set.bin",
+    "size": 32760,
+    "sha256": "D405372B3CDCEAC5483EE3AEA5F71521D96F147A31C17AF9178F04317E6DF601"
+  },
+  {
+    "path": "elegoo_pic/bmp_speed.bin",
+    "size": 32760,
+    "sha256": "AF3C449FCF859F291D47E0BE680569727C7821C32493375149631F65F1D695A3"
+  },
+  {
+    "path": "elegoo_pic/bmp_tool.bin",
+    "size": 32760,
+    "sha256": "3235C28B0997B4C4D7A4E4DC0B9BF20437D3373992521A0F74F327B202AEF789"
+  },
+  {
+    "path": "elegoo_pic/bmp_xAdd.bin",
+    "size": 32760,
+    "sha256": "21CB98DEAE37C6C88A559733F1EE97F8EBA029B62113E73581852C186DAD4CEE"
+  },
+  {
+    "path": "elegoo_pic/bmp_xDec.bin",
+    "size": 32760,
+    "sha256": "F71443CBCE5C62C2FB863B6105A1643151717DCA13187FE36B7E9F115B9D5DC1"
+  },
+  {
+    "path": "elegoo_pic/bmp_yAdd.bin",
+    "size": 32760,
+    "sha256": "57F2FD3161527E89452E20967AD42F44BFFE74D29637383740660844457C31D2"
+  },
+  {
+    "path": "elegoo_pic/bmp_yDec.bin",
+    "size": 32760,
+    "sha256": "2FE4FB3112E6B879D9DA824897305230CB881FD2DBF4978BA854E9807E19F09C"
+  },
+  {
+    "path": "elegoo_pic/bmp_zAdd.bin",
+    "size": 32760,
+    "sha256": "EAD56262BAFF365FD1346463B082EED52E23690591E02B45B565D811A2183EA2"
+  },
+  {
+    "path": "elegoo_pic/bmp_zDec.bin",
+    "size": 32760,
+    "sha256": "4D3005CCFA9BD9B4EB23B33AE967D802FF24E473E22CB2E3EE91E4ED3164D8B3"
+  },
+  {
+    "path": "elegoo_pic/bmp_zero.bin",
+    "size": 32760,
+    "sha256": "D786BB71F35021D6A2D43AD582E33DD67D3794706B686515D16BEB7841C4EB43"
+  },
+  {
+    "path": "elegoo_pic/bmp_zeroX.bin",
+    "size": 32760,
+    "sha256": "21CB98DEAE37C6C88A559733F1EE97F8EBA029B62113E73581852C186DAD4CEE"
+  },
+  {
+    "path": "elegoo_pic/bmp_zeroY.bin",
+    "size": 32760,
+    "sha256": "57F2FD3161527E89452E20967AD42F44BFFE74D29637383740660844457C31D2"
+  },
+  {
+    "path": "elegoo_pic/bmp_zeroZ.bin",
+    "size": 32760,
+    "sha256": "EAD56262BAFF365FD1346463B082EED52E23690591E02B45B565D811A2183EA2"
+  }
+]

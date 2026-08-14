@@ -1,0 +1,21 @@
+{
+    "package":  "dist_penplotter_simplified_ui_2026-08-14_141148",
+    "created":  "2026-08-14T14:11:48",
+    "environment":  "mks_robin_nano_v1_3_f4",
+    "firmware":  "elegoo.bin",
+    "firmware_sha256":  "5128A2497AD96432E9CF455343A1814AAD186AE0EC7BE47AA015C940EE6E925D",
+    "firmware_size":  487176,
+    "bed_mm":  "200x200",
+    "notes":  [
+                  "Pen plotter only",
+                  "Z axis is pen lift",
+                  "Home X/Y before plotter actions",
+                  "Soft limits enabled",
+                  "M750 embedded demos",
+                  "M752 text writer",
+                  "M753 generated art",
+                  "Simplified UI: flat plotter hub, no nested tool screen",
+                  "Demo gallery is a flat list with no categories",
+                  "Word writer and art screens trimmed to core options"
+              ]
+}
