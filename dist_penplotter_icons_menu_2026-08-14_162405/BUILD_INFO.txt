@@ -1,0 +1,8 @@
+Build: 2026-08-14 16:24
+Environment: mks_robin_nano_v1_3_f4
+Feature: Custom plotter hub icons + menu layout
+  - 8 new hub icons + pen/brush panel icons (bmp_plot_*.bin)
+  - Hub now shows a PenUp/PenDown Z status strip
+  - Hub 2x4 grid fits the 320px screen (was overflowing by 14px)
+  - Red accent primary buttons on Words/Art/Calibrate screens
+Deploy: copy elegoo.bin to SD as ELEGOO.CUR, copy assets/ to SD root

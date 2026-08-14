@@ -32,6 +32,7 @@
 #include <lvgl.h>
 
 #include "../../../module/temperature.h"
+#include "../../../feature/penplotter/penplotter_settings.h"
 #include "../../../inc/MarlinConfig.h"
 
 #if ENABLED(TOUCH_SCREEN_CALIBRATION)
@@ -186,14 +187,31 @@ void lv_draw_ready_print() {
   }
   else {
     // Plotter hub: every action is one touch away.
-    lv_big_button_create(scr, "F:/bmp_custom7.bin", "Words", INTERVAL_V, 52, event_handler, ID_T_WORDS);
-    lv_big_button_create(scr, "F:/bmp_custom4.bin", "Art", BTN_X_PIXEL + INTERVAL_V * 2, 52, event_handler, ID_T_ART);
-    lv_big_button_create(scr, "F:/bmp_more.bin", "Demos", BTN_X_PIXEL * 2 + INTERVAL_V * 3, 52, event_handler, ID_T_MORE);
-    lv_big_button_create(scr, "F:/bmp_eeprom_settings.bin", "Calibrate", BTN_X_PIXEL * 3 + INTERVAL_V * 4, 52, event_handler, ID_T_CALIBRATE);
-    lv_big_button_create(scr, "F:/bmp_speed.bin", "Controls", INTERVAL_V, BTN_Y_PIXEL + INTERVAL_H + 52, event_handler, ID_T_CONTROLS);
-    lv_big_button_create(scr, "F:/bmp_mov.bin", "Jog", BTN_X_PIXEL + INTERVAL_V * 2, BTN_Y_PIXEL + INTERVAL_H + 52, event_handler, ID_T_MOV);
-    lv_big_button_create(scr, "F:/bmp_zero.bin", "Home", BTN_X_PIXEL * 2 + INTERVAL_V * 3, BTN_Y_PIXEL + INTERVAL_H + 52, event_handler, ID_T_HOME);
-    lv_big_button_create(scr, "F:/bmp_set.bin", "Settings", BTN_X_PIXEL * 3 + INTERVAL_V * 4, BTN_Y_PIXEL + INTERVAL_H + 52, event_handler, ID_T_SETTINGS);
+    // Status strip with current pen calibration
+    penplotter_settings_sanitize();
+    lv_obj_t *panel = lv_obj_create(scr, nullptr);
+    lv_obj_set_style(panel, &style_android_panel);
+    lv_obj_set_pos(panel, 12, 8);
+    lv_obj_set_size(panel, 456, 38);
+    char status_buf[32], up_z[8], down_z[8];
+    dtostrf(penplotter_settings.pen_up_z, 1, 2, up_z);
+    dtostrf(penplotter_settings.pen_down_z, 1, 2, down_z);
+    snprintf_P(status_buf, sizeof(status_buf), PSTR("PenUp  %smm"), up_z);
+    lv_obj_t *label = lv_label_create(panel, 24, 3, status_buf);
+    lv_obj_set_style(label, &style_android_muted);
+    snprintf_P(status_buf, sizeof(status_buf), PSTR("PenDown  %smm"), down_z);
+    label = lv_label_create(panel, 258, 3, status_buf);
+    lv_obj_set_style(label, &style_android_muted);
+
+    // 2x4 icon grid; icons are 117x126 so rows must not use BTN_Y_PIXEL (140)
+    lv_big_button_create(scr, "F:/bmp_plot_words.bin", "Words", INTERVAL_V, 52, event_handler, ID_T_WORDS);
+    lv_big_button_create(scr, "F:/bmp_plot_art.bin", "Art", BTN_X_PIXEL + INTERVAL_V * 2, 52, event_handler, ID_T_ART);
+    lv_big_button_create(scr, "F:/bmp_plot_demos.bin", "Demos", BTN_X_PIXEL * 2 + INTERVAL_V * 3, 52, event_handler, ID_T_MORE);
+    lv_big_button_create(scr, "F:/bmp_plot_calibrate.bin", "Calibrate", BTN_X_PIXEL * 3 + INTERVAL_V * 4, 52, event_handler, ID_T_CALIBRATE);
+    lv_big_button_create(scr, "F:/bmp_plot_controls.bin", "Controls", INTERVAL_V, 182, event_handler, ID_T_CONTROLS);
+    lv_big_button_create(scr, "F:/bmp_plot_jog.bin", "Jog", BTN_X_PIXEL + INTERVAL_V * 2, 182, event_handler, ID_T_MOV);
+    lv_big_button_create(scr, "F:/bmp_plot_home.bin", "Home", BTN_X_PIXEL * 2 + INTERVAL_V * 3, 182, event_handler, ID_T_HOME);
+    lv_big_button_create(scr, "F:/bmp_plot_settings.bin", "Settings", BTN_X_PIXEL * 3 + INTERVAL_V * 4, 182, event_handler, ID_T_SETTINGS);
     lv_android_home_indicator(scr);
   }
 

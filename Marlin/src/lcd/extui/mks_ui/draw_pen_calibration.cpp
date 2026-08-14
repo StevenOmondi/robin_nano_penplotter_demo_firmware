@@ -29,8 +29,8 @@ enum {
   ID_CAL_RETURN
 };
 
-static lv_obj_t *cal_button(const char *text, const lv_coord_t x, const lv_coord_t y, const int id, lv_event_cb_t cb) {
-  lv_obj_t *btn = lv_btn_create(scr, x, y, 106, 50, cb, id, &style_para_value);
+static lv_obj_t *cal_button(const char *text, const lv_coord_t x, const lv_coord_t y, const int id, lv_event_cb_t cb, lv_style_t *style = &style_para_value) {
+  lv_obj_t *btn = lv_btn_create(scr, x, y, 106, 50, cb, id, style);
   lv_obj_t *label = lv_label_create_empty(btn);
   lv_label_set_text(label, text);
   lv_obj_align(label, btn, LV_ALIGN_CENTER, 0, 0);
@@ -102,13 +102,17 @@ void lv_draw_pen_calibration() {
   lv_obj_set_pos(panel, 12, 44);
   lv_obj_set_size(panel, 456, 70);
 
+  lv_obj_t *calIcon = lv_img_create(panel, nullptr);
+  lv_img_set_src(calIcon, "F:/bmp_plot_pen.bin");
+  lv_obj_set_pos(calIcon, 18, 15);
+
   char line[96], up[12], down[12];
   dtostrf(penplotter_settings.pen_up_z, 1, 2, up);
   dtostrf(penplotter_settings.pen_down_z, 1, 2, down);
-  snprintf_P(line, sizeof(line), PSTR("Pen Up Z: %s mm   Pen Down Z: %s mm"), up, down);
-  lv_obj_t *label = lv_label_create(panel, 12, 10, line);
+  snprintf_P(line, sizeof(line), PSTR("PenUp %s  PenDown %s"), up, down);
+  lv_obj_t *label = lv_label_create(panel, 62, 10, line);
   lv_obj_set_style(label, &tft_style_label_rel);
-  lv_obj_t *hint = lv_label_create(panel, 12, 40, "Tap test homes X/Y, moves to center, lowers Z, then lifts.");
+  lv_obj_t *hint = lv_label_create(panel, 62, 40, "Tap test homes X/Y, moves to center, lowers Z, then lifts.");
   lv_obj_set_style(hint, &style_android_muted);
 
   static const lv_coord_t x[4] = { 12, 126, 240, 354 };
@@ -117,7 +121,7 @@ void lv_draw_pen_calibration() {
   cal_button("Down\n+0.05", x[2], 130, ID_CAL_DOWN_PLUS, event_handler);
   cal_button("Down\n-0.05", x[3], 130, ID_CAL_DOWN_MINUS, event_handler);
 
-  cal_button("Test\nTap", x[0], 200, ID_CAL_TEST, event_handler);
+  cal_button("Test\nTap", x[0], 200, ID_CAL_TEST, event_handler, &style_android_accent);
   cal_button("Paper\n0.05", x[1], 200, ID_CAL_PAPER, event_handler);
   cal_button("Save", x[2], 200, ID_CAL_SAVE, event_handler);
   cal_button(common_menu.text_back, x[3], 200, ID_CAL_RETURN, event_handler);

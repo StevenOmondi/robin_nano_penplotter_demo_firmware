@@ -216,7 +216,19 @@ static FSTR_P const assets[] = {
   F("bmp_custom4.bin"),
   F("bmp_custom5.bin"),
   F("bmp_custom6.bin"),
-  F("bmp_custom7.bin")
+  F("bmp_custom7.bin"),
+
+  // Pen plotter hub icons
+  F("bmp_plot_words.bin"),
+  F("bmp_plot_art.bin"),
+  F("bmp_plot_demos.bin"),
+  F("bmp_plot_calibrate.bin"),
+  F("bmp_plot_controls.bin"),
+  F("bmp_plot_jog.bin"),
+  F("bmp_plot_home.bin"),
+  F("bmp_plot_settings.bin"),
+  F("bmp_plot_pen.bin"),
+  F("bmp_plot_brush.bin")
 };
 
 #if HAS_SPI_FLASH_FONT

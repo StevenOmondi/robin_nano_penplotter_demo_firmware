@@ -1,0 +1,29 @@
+{
+    "package":  "dist_penplotter_icons_menu_2026-08-14_162405",
+    "created":  "2026-08-14T16:24:05",
+    "environment":  "mks_robin_nano_v1_3_f4",
+    "firmware":  "elegoo.bin",
+    "firmware_sha256":  "A905EF39D64651717B84AD710E25B9F0D6864290E767A645166F8F5D15AE8135",
+    "firmware_size":  488184,
+    "bed_mm":  "200x200",
+    "notes":  [
+                  "Pen plotter only",
+                  "Z axis is pen lift",
+                  "Home X/Y before plotter actions",
+                  "Soft limits enabled",
+                  "M750 embedded demos",
+                  "M752 text writer",
+                  "M753 generated art",
+                  "Simplified UI: flat plotter hub, no nested tool screen",
+                  "Elegoo red theme: red header bar, red accents, dark surfaces",
+                  "M752 paragraph writer: up to 512 chars, auto word-wrap, 32 lines",
+                  "M752 N\"PLOT.TXT\" reads a paragraph from the SD card",
+                  "Words screen has a Para SD button; sample PLOT.TXT included",
+                  "Custom pen-plotter hub icons (117x126, Elegoo red palette)",
+                  "Hub layout fixed: 2x4 grid no longer overflows the 320px screen",
+                  "Hub status strip shows PenUp/PenDown Z calibration values",
+                  "Words/Art/Calibrate panels show pen/brush icons",
+                  "Primary actions (Write/Draw/Test Tap) use red accent buttons",
+                  "New assets: bmp_plot_*.bin (10 icons) - copy assets/ to SD"
+              ]
+}

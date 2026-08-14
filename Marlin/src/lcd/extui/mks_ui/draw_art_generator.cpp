@@ -34,8 +34,8 @@ enum {
   ID_ART_RETURN
 };
 
-static lv_obj_t *art_button(const char *text, const lv_coord_t x, const lv_coord_t y, const int id, lv_event_cb_t cb) {
-  lv_obj_t *btn = lv_btn_create(scr, x, y, 106, 50, cb, id, &style_para_value);
+static lv_obj_t *art_button(const char *text, const lv_coord_t x, const lv_coord_t y, const int id, lv_event_cb_t cb, lv_style_t *style = &style_para_value) {
+  lv_obj_t *btn = lv_btn_create(scr, x, y, 106, 50, cb, id, style);
   lv_obj_t *label = lv_label_create_empty(btn);
   lv_label_set_text(label, text);
   lv_obj_align(label, btn, LV_ALIGN_CENTER, 0, 0);
@@ -101,13 +101,17 @@ void lv_draw_art_generator() {
   lv_obj_set_pos(panel, 12, 44);
   lv_obj_set_size(panel, 456, 66);
 
+  lv_obj_t *brushIcon = lv_img_create(panel, nullptr);
+  lv_img_set_src(brushIcon, "F:/bmp_plot_brush.bin");
+  lv_obj_set_pos(brushIcon, 18, 13);
+
   char line[96];
   snprintf_P(line, sizeof(line), PSTR("%s  %umm  Density %u"),
     shape_names[art_shape_index], size_values[art_size_index], density_values[art_density_index]);
-  lv_obj_t *label = lv_label_create(panel, 12, 10, line);
+  lv_obj_t *label = lv_label_create(panel, 62, 10, line);
   lv_obj_set_style(label, &tft_style_label_rel);
   snprintf_P(line, sizeof(line), PSTR("%s   Centered 200x200"), art_dry_run ? "Dry run" : "Draw");
-  lv_obj_t *meta = lv_label_create(panel, 12, 38, line);
+  lv_obj_t *meta = lv_label_create(panel, 62, 38, line);
   lv_obj_set_style(meta, &style_android_muted);
 
   static const lv_coord_t x[4] = { 12, 126, 240, 354 };
@@ -120,7 +124,7 @@ void lv_draw_art_generator() {
   snprintf_P(line, sizeof(line), PSTR("Dry\n%s"), art_dry_run ? "On" : "Off");
   art_button(line, x[3], 128, ID_ART_DRY, event_handler);
 
-  art_button("Draw", x[1], 198, ID_ART_DRAW, event_handler);
+  art_button("Draw", x[1], 198, ID_ART_DRAW, event_handler, &style_android_accent);
   art_button(common_menu.text_back, x[3], 198, ID_ART_RETURN, event_handler);
 
   lv_android_home_indicator(scr);
