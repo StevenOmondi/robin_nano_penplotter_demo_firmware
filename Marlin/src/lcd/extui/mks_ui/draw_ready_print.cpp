@@ -69,7 +69,7 @@ enum { ID_T_WORDS = 1, ID_T_ART, ID_T_MORE, ID_T_CONTROLS, ID_T_CALIBRATE, ID_T_
 
 static void event_handler(lv_obj_t *obj, lv_event_t event) {
   if (event != LV_EVENT_RELEASED) return;
-  if (obj->mks_obj_id == ID_T_SETTINGS) { lv_clear_ready_print(); lv_draw_set(); return; }
+  if (obj->mks_obj_id == ID_T_SETTINGS) { lv_clear_ready_print(); lv_draw_plotter_settings(); return; }
   lv_clear_ready_print();
   switch (obj->mks_obj_id) {
     case ID_T_WORDS:    lv_draw_word_writer(); break;
@@ -187,31 +187,20 @@ void lv_draw_ready_print() {
   }
   else {
     // Plotter hub: every action is one touch away.
-    // Status strip with current pen calibration
+    // Live status bar with pen state, position and job state
     penplotter_settings_sanitize();
-    lv_obj_t *panel = lv_obj_create(scr, nullptr);
-    lv_obj_set_style(panel, &style_android_panel);
-    lv_obj_set_pos(panel, 12, 8);
-    lv_obj_set_size(panel, 456, 38);
-    char status_buf[32], up_z[8], down_z[8];
-    dtostrf(penplotter_settings.pen_up_z, 1, 2, up_z);
-    dtostrf(penplotter_settings.pen_down_z, 1, 2, down_z);
-    snprintf_P(status_buf, sizeof(status_buf), PSTR("PenUp  %smm"), up_z);
-    lv_obj_t *label = lv_label_create(panel, 24, 3, status_buf);
-    lv_obj_set_style(label, &style_android_muted);
-    snprintf_P(status_buf, sizeof(status_buf), PSTR("PenDown  %smm"), down_z);
-    label = lv_label_create(panel, 258, 3, status_buf);
-    lv_obj_set_style(label, &style_android_muted);
+    plotter_status_create(scr);
+    plotter_status_start();
 
-    // 2x4 icon grid; icons are 117x126 so rows must not use BTN_Y_PIXEL (140)
-    lv_big_button_create(scr, "F:/bmp_plot_words.bin", "Words", INTERVAL_V, 52, event_handler, ID_T_WORDS);
-    lv_big_button_create(scr, "F:/bmp_plot_art.bin", "Art", BTN_X_PIXEL + INTERVAL_V * 2, 52, event_handler, ID_T_ART);
-    lv_big_button_create(scr, "F:/bmp_plot_demos.bin", "Demos", BTN_X_PIXEL * 2 + INTERVAL_V * 3, 52, event_handler, ID_T_MORE);
-    lv_big_button_create(scr, "F:/bmp_plot_calibrate.bin", "Calibrate", BTN_X_PIXEL * 3 + INTERVAL_V * 4, 52, event_handler, ID_T_CALIBRATE);
-    lv_big_button_create(scr, "F:/bmp_plot_controls.bin", "Controls", INTERVAL_V, 182, event_handler, ID_T_CONTROLS);
-    lv_big_button_create(scr, "F:/bmp_plot_jog.bin", "Jog", BTN_X_PIXEL + INTERVAL_V * 2, 182, event_handler, ID_T_MOV);
-    lv_big_button_create(scr, "F:/bmp_plot_home.bin", "Home", BTN_X_PIXEL * 2 + INTERVAL_V * 3, 182, event_handler, ID_T_HOME);
-    lv_big_button_create(scr, "F:/bmp_plot_settings.bin", "Settings", BTN_X_PIXEL * 3 + INTERVAL_V * 4, 182, event_handler, ID_T_SETTINGS);
+    // 2x4 icon grid; icons are 117x102 so rows must not use BTN_Y_PIXEL (140)
+    lv_big_button_create(scr, "F:/bmp_plot_words.bin", "Words", INTERVAL_V, 84, event_handler, ID_T_WORDS);
+    lv_big_button_create(scr, "F:/bmp_plot_art.bin", "Art", BTN_X_PIXEL + INTERVAL_V * 2, 84, event_handler, ID_T_ART);
+    lv_big_button_create(scr, "F:/bmp_plot_demos.bin", "Demos", BTN_X_PIXEL * 2 + INTERVAL_V * 3, 84, event_handler, ID_T_MORE);
+    lv_big_button_create(scr, "F:/bmp_plot_calibrate.bin", "Calibrate", BTN_X_PIXEL * 3 + INTERVAL_V * 4, 84, event_handler, ID_T_CALIBRATE);
+    lv_big_button_create(scr, "F:/bmp_plot_controls.bin", "Controls", INTERVAL_V, 196, event_handler, ID_T_CONTROLS);
+    lv_big_button_create(scr, "F:/bmp_plot_jog.bin", "Jog", BTN_X_PIXEL + INTERVAL_V * 2, 196, event_handler, ID_T_MOV);
+    lv_big_button_create(scr, "F:/bmp_plot_home.bin", "Home", BTN_X_PIXEL * 2 + INTERVAL_V * 3, 196, event_handler, ID_T_HOME);
+    lv_big_button_create(scr, "F:/bmp_plot_settings.bin", "Settings", BTN_X_PIXEL * 3 + INTERVAL_V * 4, 196, event_handler, ID_T_SETTINGS);
     lv_android_home_indicator(scr);
   }
 
@@ -248,6 +237,7 @@ void lv_temp_refr() {
 }
 
 void lv_clear_ready_print() {
+  plotter_status_stop();
   #if HAS_ROTARY_ENCODER
     if (gCfgItems.encoder_enable) lv_group_remove_all_objs(g);
   #endif

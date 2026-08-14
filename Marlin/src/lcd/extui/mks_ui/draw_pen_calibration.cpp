@@ -97,9 +97,12 @@ void lv_draw_pen_calibration() {
   penplotter_settings_sanitize();
   scr = lv_screen_create(PLOTTER_CALIB_UI, "Calibrate");
 
+  plotter_status_create(scr);
+  plotter_status_start();
+
   lv_obj_t *panel = lv_obj_create(scr, nullptr);
   lv_obj_set_style(panel, &style_android_panel);
-  lv_obj_set_pos(panel, 12, 44);
+  lv_obj_set_pos(panel, 12, 84);
   lv_obj_set_size(panel, 456, 70);
 
   lv_obj_t *calIcon = lv_img_create(panel, nullptr);
@@ -116,20 +119,21 @@ void lv_draw_pen_calibration() {
   lv_obj_set_style(hint, &style_android_muted);
 
   static const lv_coord_t x[4] = { 12, 126, 240, 354 };
-  cal_button("Up\n+0.10", x[0], 130, ID_CAL_UP_PLUS, event_handler);
-  cal_button("Up\n-0.10", x[1], 130, ID_CAL_UP_MINUS, event_handler);
-  cal_button("Down\n+0.05", x[2], 130, ID_CAL_DOWN_PLUS, event_handler);
-  cal_button("Down\n-0.05", x[3], 130, ID_CAL_DOWN_MINUS, event_handler);
+  cal_button("Up\n+0.10", x[0], 164, ID_CAL_UP_PLUS, event_handler);
+  cal_button("Up\n-0.10", x[1], 164, ID_CAL_UP_MINUS, event_handler);
+  cal_button("Down\n+0.05", x[2], 164, ID_CAL_DOWN_PLUS, event_handler);
+  cal_button("Down\n-0.05", x[3], 164, ID_CAL_DOWN_MINUS, event_handler);
 
-  cal_button("Test\nTap", x[0], 200, ID_CAL_TEST, event_handler, &style_android_accent);
-  cal_button("Paper\n0.05", x[1], 200, ID_CAL_PAPER, event_handler);
-  cal_button("Save", x[2], 200, ID_CAL_SAVE, event_handler);
-  cal_button(common_menu.text_back, x[3], 200, ID_CAL_RETURN, event_handler);
+  cal_button("Test\nTap", x[0], 226, ID_CAL_TEST, event_handler, &style_android_accent);
+  cal_button("Paper\n0.05", x[1], 226, ID_CAL_PAPER, event_handler);
+  cal_button("Save", x[2], 226, ID_CAL_SAVE, event_handler);
+  cal_button(common_menu.text_back, x[3], 226, ID_CAL_RETURN, event_handler);
 
   lv_android_home_indicator(scr);
 }
 
 void lv_clear_pen_calibration() {
+  plotter_status_stop();
   #if HAS_ROTARY_ENCODER
     if (gCfgItems.encoder_enable) lv_group_remove_all_objs(g);
   #endif

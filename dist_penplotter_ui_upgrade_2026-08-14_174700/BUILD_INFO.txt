@@ -1,0 +1,10 @@
+Build: 2026-08-14 17:47
+Environment: mks_robin_nano_v1_3_f4
+Feature: Major pen plotter UI upgrade
+  - Live status bar on every plotter screen (pen state chip, live X/Y, job state)
+  - Hub: 2x4 icon grid + live telemetry; icons re-rendered 117x102
+  - New Plotter Settings screen: PenUp/PenDown Z, speed %, favorite demo (number keypad)
+  - Demos screen: curated 12-demo gallery (Words, Paragraph, House, all 9 art shapes)
+  - Header gets a dark bottom accent line; consistent cards and spacing
+  - Hub Settings now opens the plotter settings screen (not generic machine settings)
+Deploy: copy elegoo.bin to SD as ELEGOO.CUR, copy assets_icons/*.bin to SD assets/

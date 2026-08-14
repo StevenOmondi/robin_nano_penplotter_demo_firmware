@@ -295,6 +295,11 @@ lv_style_t lv_bar_style_indic;
 lv_style_t style_btn_pr;
 lv_style_t style_btn_rel;
 
+lv_style_t style_plotter_status;
+lv_style_t style_plotter_chip_ok;
+lv_style_t style_plotter_chip_warn;
+lv_style_t style_plotter_chip_err;
+
 void tft_style_init() {
   lv_style_copy(&tft_style_scr, &lv_style_scr);
   tft_style_scr.body.main_color   = LV_COLOR_BACKGROUND;
@@ -308,7 +313,9 @@ void tft_style_init() {
   lv_style_copy(&style_android_header, &lv_style_plain);
   style_android_header.body.main_color   = ANDROID_HEADER_COLOR;
   style_android_header.body.grad_color   = ANDROID_HEADER_COLOR;
-  style_android_header.body.border.width = 0;
+  style_android_header.body.border.color = ANDROID_ACCENT_DARK_COLOR;
+  style_android_header.body.border.width = 2;
+  style_android_header.body.border.part  = LV_BORDER_BOTTOM;
   style_android_header.body.shadow.width = 0;
   style_android_header.body.radius       = 0;
   style_android_header.text.color        = ANDROID_TEXT_COLOR;
@@ -475,6 +482,25 @@ void tft_style_init() {
   lv_bar_style_indic.body.main_color   = ANDROID_ACCENT_COLOR;
   lv_bar_style_indic.body.grad_color   = ANDROID_ACCENT_COLOR;
   lv_bar_style_indic.body.border.color = ANDROID_ACCENT_COLOR;
+
+  lv_style_copy(&style_plotter_status, &style_android_panel);
+  style_plotter_status.body.radius = 10;
+
+  lv_style_copy(&style_plotter_chip_ok, &style_android_chip);
+  style_plotter_chip_ok.body.main_color   = LV_COLOR_MAKE(0x1E, 0x8E, 0x3E);
+  style_plotter_chip_ok.body.grad_color   = LV_COLOR_MAKE(0x1E, 0x8E, 0x3E);
+  style_plotter_chip_ok.body.border.color = LV_COLOR_MAKE(0x15, 0x6B, 0x2D);
+
+  lv_style_copy(&style_plotter_chip_warn, &style_android_chip);
+  style_plotter_chip_warn.body.main_color   = LV_COLOR_MAKE(0xF9, 0xAB, 0x00);
+  style_plotter_chip_warn.body.grad_color   = LV_COLOR_MAKE(0xF9, 0xAB, 0x00);
+  style_plotter_chip_warn.body.border.color = LV_COLOR_MAKE(0xC8, 0x89, 0x00);
+  style_plotter_chip_warn.text.color        = ANDROID_BG_COLOR;
+
+  lv_style_copy(&style_plotter_chip_err, &style_android_chip);
+  style_plotter_chip_err.body.main_color   = LV_COLOR_MAKE(0xD9, 0x30, 0x25);
+  style_plotter_chip_err.body.grad_color   = LV_COLOR_MAKE(0xD9, 0x30, 0x25);
+  style_plotter_chip_err.body.border.color = LV_COLOR_MAKE(0xA5, 0x21, 0x1A);
 }
 
 #define MAX_TITLE_LEN 28
@@ -551,6 +577,7 @@ char *getDispText(int index) {
     case WORD_WRITER_UI:      strcpy(public_buf_l, "Words"); break;
     case PLOTTER_ART_UI:      strcpy(public_buf_l, "Art"); break;
     case PLOTTER_CALIB_UI:    strcpy(public_buf_l, "Calibrate"); break;
+    case PLOTTER_SETTINGS_UI: strcpy(public_buf_l, "Plotter Settings"); break;
     case WIFI_LIST_UI:        TERN_(MKS_WIFI_MODULE, strcpy(public_buf_l, list_menu.title)); break;
     case MACHINE_PARA_UI:     strcpy(public_buf_l, MachinePara_menu.title); break;
     case BABYSTEP_UI:         strcpy(public_buf_l, operation_menu.babystep); break;
@@ -980,6 +1007,7 @@ void clear_cur_ui() {
     case WORD_WRITER_UI:              lv_clear_word_writer(); break;
     case PLOTTER_ART_UI:              lv_clear_art_generator(); break;
     case PLOTTER_CALIB_UI:            lv_clear_pen_calibration(); break;
+    case PLOTTER_SETTINGS_UI:         lv_clear_plotter_settings(); break;
     case MESHLEVELING_UI:             break;
     case HARDWARE_TEST_UI:            break;
     #if ENABLED(MKS_WIFI_MODULE)
@@ -1091,6 +1119,7 @@ void draw_return_ui() {
     case WORD_WRITER_UI:              lv_draw_word_writer(); break;
     case PLOTTER_ART_UI:              lv_draw_art_generator(); break;
     case PLOTTER_CALIB_UI:            lv_draw_pen_calibration(); break;
+    case PLOTTER_SETTINGS_UI:         lv_draw_plotter_settings(); break;
     case GCODE_UI:                    lv_draw_gcode(); break;
       case MESHLEVELING_UI:             break;
       case HARDWARE_TEST_UI:            break;

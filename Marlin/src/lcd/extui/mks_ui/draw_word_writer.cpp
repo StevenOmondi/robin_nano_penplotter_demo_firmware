@@ -191,9 +191,12 @@ static void event_handler(lv_obj_t *obj, lv_event_t event) {
 void lv_draw_word_writer() {
   scr = lv_screen_create(WORD_WRITER_UI, "Words");
 
+  plotter_status_create(scr);
+  plotter_status_start();
+
   lv_obj_t *panel = lv_obj_create(scr, nullptr);
   lv_obj_set_style(panel, &style_android_panel);
-  lv_obj_set_pos(panel, 12, 42);
+  lv_obj_set_pos(panel, 12, 84);
   lv_obj_set_size(panel, 456, 54);
 
   lv_obj_t *penIcon = lv_img_create(panel, nullptr);
@@ -219,25 +222,26 @@ void lv_draw_word_writer() {
   lv_obj_set_style(metaLabel, &style_android_muted);
 
   static const lv_coord_t x[4] = { 12, 126, 240, 354 };
-  text_button("Edit", x[0], 116, ID_WORD_EDIT, event_handler);
+  text_button("Edit", x[0], 148, ID_WORD_EDIT, event_handler);
   snprintf_P(line, sizeof(line), PSTR("Font\n%s"), font_names[plotter_font_index]);
-  text_button(line, x[1], 116, ID_WORD_FONT, event_handler);
+  text_button(line, x[1], 148, ID_WORD_FONT, event_handler);
   snprintf_P(line, sizeof(line), PSTR("Size\n%u"), size_values[plotter_size_index]);
-  text_button(line, x[2], 116, ID_WORD_SIZE, event_handler);
+  text_button(line, x[2], 148, ID_WORD_SIZE, event_handler);
   snprintf_P(line, sizeof(line), PSTR("Align\n%s"), align_names[plotter_align_index]);
-  text_button(line, x[3], 116, ID_WORD_ALIGN, event_handler);
+  text_button(line, x[3], 148, ID_WORD_ALIGN, event_handler);
 
   static const lv_coord_t x5[5] = { 12, 100, 188, 276, 364 };
-  text_button("Frame", x5[0], 184, ID_WORD_FRAME, event_handler, 86);
-  text_button("Dry Run", x5[1], 184, ID_WORD_DRY, event_handler, 86);
-  text_button("Write", x5[2], 184, ID_WORD_WRITE, event_handler, 86, &style_android_accent);
-  text_button("Para SD", x5[3], 184, ID_WORD_PARA, event_handler, 86);
-  text_button(common_menu.text_back, x5[4], 184, ID_WORD_RETURN, event_handler, 86);
+  text_button("Frame", x5[0], 210, ID_WORD_FRAME, event_handler, 86);
+  text_button("Dry Run", x5[1], 210, ID_WORD_DRY, event_handler, 86);
+  text_button("Write", x5[2], 210, ID_WORD_WRITE, event_handler, 86, &style_android_accent);
+  text_button("Para SD", x5[3], 210, ID_WORD_PARA, event_handler, 86);
+  text_button(common_menu.text_back, x5[4], 210, ID_WORD_RETURN, event_handler, 86);
 
   lv_android_home_indicator(scr);
 }
 
 void lv_clear_word_writer() {
+  plotter_status_stop();
   #if HAS_ROTARY_ENCODER
     if (gCfgItems.encoder_enable) lv_group_remove_all_objs(g);
   #endif

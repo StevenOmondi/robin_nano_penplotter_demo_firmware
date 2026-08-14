@@ -31,6 +31,8 @@
 #include "../../../gcode/queue.h"
 #include "../../../module/planner.h"
 #include "../../../inc/MarlinConfig.h"
+#include "../../../feature/penplotter/penplotter_settings.h"
+#include "../../../module/motion.h"
 
 #if ENABLED(POWER_LOSS_RECOVERY)
   #include "../../../feature/powerloss.h"
@@ -287,6 +289,19 @@ static void disp_key_value() {
         itoa(TERN(Z2_SENSORLESS, stepperZ2.homing_threshold(), 0), public_buf_m, 10);
       #endif
       break;
+
+    case PlotterPenUpZ:
+      dtostrf(penplotter_settings.pen_up_z, 1, 2, public_buf_m);
+      break;
+    case PlotterPenDownZ:
+      dtostrf(penplotter_settings.pen_down_z, 1, 2, public_buf_m);
+      break;
+    case PlotterSpeedPct:
+      itoa(feedrate_percentage, public_buf_m, 10);
+      break;
+    case PlotterFavoriteDemo:
+      itoa(penplotter_settings.favorite_demo, public_buf_m, 10);
+      break;
   }
 
   strcpy(key_value, public_buf_m);
@@ -439,6 +454,21 @@ static void set_value_confirm() {
     case y_sensitivity: TERN_(Y_SENSORLESS, stepperY.homing_threshold(atoi(key_value))); break;
     case z_sensitivity: TERN_(Z_SENSORLESS, stepperZ.homing_threshold(atoi(key_value))); break;
     case z2_sensitivity: TERN_(Z2_SENSORLESS, stepperZ2.homing_threshold(atoi(key_value))); break;
+
+    case PlotterPenUpZ:
+      penplotter_settings.pen_up_z = atof(key_value);
+      penplotter_settings_sanitize();
+      break;
+    case PlotterPenDownZ:
+      penplotter_settings.pen_down_z = atof(key_value);
+      penplotter_settings_sanitize();
+      break;
+    case PlotterSpeedPct:
+      feedrate_percentage = constrain(atoi(key_value), 10, 300);
+      break;
+    case PlotterFavoriteDemo:
+      penplotter_settings.favorite_demo = constrain(atoi(key_value), 1, 51);
+      break;
   }
   gcode.process_subcommands_now(F("M500"));
 }

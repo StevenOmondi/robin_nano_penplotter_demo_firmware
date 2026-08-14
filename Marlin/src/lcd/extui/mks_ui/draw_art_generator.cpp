@@ -96,9 +96,12 @@ static void event_handler(lv_obj_t *obj, lv_event_t event) {
 void lv_draw_art_generator() {
   scr = lv_screen_create(PLOTTER_ART_UI, "Art");
 
+  plotter_status_create(scr);
+  plotter_status_start();
+
   lv_obj_t *panel = lv_obj_create(scr, nullptr);
   lv_obj_set_style(panel, &style_android_panel);
-  lv_obj_set_pos(panel, 12, 44);
+  lv_obj_set_pos(panel, 12, 84);
   lv_obj_set_size(panel, 456, 66);
 
   lv_obj_t *brushIcon = lv_img_create(panel, nullptr);
@@ -116,21 +119,22 @@ void lv_draw_art_generator() {
 
   static const lv_coord_t x[4] = { 12, 126, 240, 354 };
   snprintf_P(line, sizeof(line), PSTR("Shape\n%s"), shape_names[art_shape_index]);
-  art_button(line, x[0], 128, ID_ART_SHAPE, event_handler);
+  art_button(line, x[0], 160, ID_ART_SHAPE, event_handler);
   snprintf_P(line, sizeof(line), PSTR("Size\n%umm"), size_values[art_size_index]);
-  art_button(line, x[1], 128, ID_ART_SIZE, event_handler);
+  art_button(line, x[1], 160, ID_ART_SIZE, event_handler);
   snprintf_P(line, sizeof(line), PSTR("Density\n%u"), density_values[art_density_index]);
-  art_button(line, x[2], 128, ID_ART_DENSITY, event_handler);
+  art_button(line, x[2], 160, ID_ART_DENSITY, event_handler);
   snprintf_P(line, sizeof(line), PSTR("Dry\n%s"), art_dry_run ? "On" : "Off");
-  art_button(line, x[3], 128, ID_ART_DRY, event_handler);
+  art_button(line, x[3], 160, ID_ART_DRY, event_handler);
 
-  art_button("Draw", x[1], 198, ID_ART_DRAW, event_handler, &style_android_accent);
-  art_button(common_menu.text_back, x[3], 198, ID_ART_RETURN, event_handler);
+  art_button("Draw", x[1], 222, ID_ART_DRAW, event_handler, &style_android_accent);
+  art_button(common_menu.text_back, x[3], 222, ID_ART_RETURN, event_handler);
 
   lv_android_home_indicator(scr);
 }
 
 void lv_clear_art_generator() {
+  plotter_status_stop();
   #if HAS_ROTARY_ENCODER
     if (gCfgItems.encoder_enable) lv_group_remove_all_objs(g);
   #endif

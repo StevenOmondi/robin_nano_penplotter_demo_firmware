@@ -1,0 +1,30 @@
+{
+    "package":  "dist_penplotter_ui_upgrade_2026-08-14_174700",
+    "created":  "2026-08-14T17:47:00",
+    "environment":  "mks_robin_nano_v1_3_f4",
+    "firmware":  "elegoo.bin",
+    "firmware_sha256":  "27D3E84FE8E3FB6C7285579E5D4CDB040868BED3EDC7A767D46451A17ACE2CFC",
+    "firmware_size":  490240,
+    "bed_mm":  "200x200",
+    "notes":  [
+                  "Pen plotter only",
+                  "Z axis is pen lift",
+                  "Home X/Y before plotter actions",
+                  "Soft limits enabled",
+                  "M750 embedded demos",
+                  "M752 text writer + paragraph writer (512 chars, auto word-wrap)",
+                  "M752 N\"PLOT.TXT\" reads a paragraph from the SD card",
+                  "M753 generated art (9 shapes)",
+                  "Elegoo red theme: red header bar, red accents, dark surfaces",
+                  "MAJOR UI UPGRADE: live status bar on all plotter screens",
+                  "Status bar: pen state chip (up/down/moving), live X/Y position, job state (idle/busy%/paused/stopped)",
+                  "Hub: 2x4 icon grid with live telemetry, icons re-rendered 117x102",
+                  "New Plotter Settings screen: PenUp/PenDown Z, plotter speed %, favorite demo",
+                  "Plotter settings edited via number keypad, saved to EEPROM",
+                  "Demos screen: curated 12-demo gallery - Words, Paragraph, House, Square, Circle, Spiral, Star, Grid, Hatch, Waves, Mandala, Spiro",
+                  "Header refined with dark bottom accent line",
+                  "Hub Settings button opens the plotter settings screen",
+                  "Regenerate icons: python tools/make_plot_icons.py; verify: check_plot_icon_sizes.py",
+                  "New assets: bmp_plot_*.bin (10 icons, 117x102 hub) - copy assets_icons to SD assets/"
+              ]
+}

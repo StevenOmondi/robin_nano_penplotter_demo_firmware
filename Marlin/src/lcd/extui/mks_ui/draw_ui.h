@@ -87,6 +87,8 @@
 #include "draw_word_writer.h"
 #include "draw_art_generator.h"
 #include "draw_pen_calibration.h"
+#include "draw_plotter_settings.h"
+#include "draw_plotter_status.h"
 #include "draw_media_select.h"
 #include "draw_encoder_settings.h"
 
@@ -308,6 +310,7 @@ typedef enum {
   WORD_WRITER_UI,
   PLOTTER_ART_UI,
   PLOTTER_CALIB_UI,
+  PLOTTER_SETTINGS_UI,
   HARDWARE_TEST_UI,
   WIFI_LIST_UI,
   KEYBOARD_UI,
@@ -426,7 +429,12 @@ typedef enum {
   x_sensitivity,
   y_sensitivity,
   z_sensitivity,
-  z2_sensitivity
+  z2_sensitivity,
+
+  PlotterPenUpZ,
+  PlotterPenDownZ,
+  PlotterSpeedPct,
+  PlotterFavoriteDemo
 } num_key_value_state;
 extern num_key_value_state value;
 
@@ -466,6 +474,10 @@ extern lv_style_t style_para_back;
 extern lv_style_t lv_bar_style_indic;
 extern lv_style_t style_btn_pr;
 extern lv_style_t style_btn_rel;
+extern lv_style_t style_plotter_status;
+extern lv_style_t style_plotter_chip_ok;
+extern lv_style_t style_plotter_chip_warn;
+extern lv_style_t style_plotter_chip_err;
 
 extern lv_point_t line_points[4][2];
 
