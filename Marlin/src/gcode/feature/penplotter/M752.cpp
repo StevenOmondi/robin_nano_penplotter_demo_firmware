@@ -3,10 +3,13 @@
  *
  * Usage:
  *   M752 F0 S18 A1 W1 L120 R0 M0 "HELLO|PLOTTER"
+ *   M752 N"PLOT.TXT"
  *   M752 D1
  *
  * F0 Vector, F1 Block, F2 Outline, F3 Italic
  * A0 left, A1 center, A2 right. Use | for line breaks.
+ * N"file.txt" reads a paragraph from an SD card text file.
+ * Long lines wrap automatically to fit the bed. Paragraphs up to 32 lines.
  * P1 dry-runs with the pen lifted. B1 frames the fitted text box.
  */
 
@@ -16,6 +19,7 @@
 
 #include "../../gcode.h"
 #include "../../../feature/penplotter/penplotter_settings.h"
+#include "../../../sd/cardreader.h"
 #include "../../../lcd/marlinui.h"
 #include "../../../module/motion.h"
 #include "../../../module/planner.h"
@@ -25,6 +29,8 @@ namespace {
   static constexpr float DRAW_MARGIN = 10.0f;
   static constexpr float MAX_DRAW_W = X_BED_SIZE - DRAW_MARGIN * 2.0f;
   static constexpr float MAX_DRAW_H = Y_BED_SIZE - DRAW_MARGIN * 2.0f;
+  static constexpr uint8_t PARAGRAPH_MAX_LINES = 32;
+  static constexpr uint8_t PARAGRAPH_BUF = 512;
   static constexpr float PLOTTER_CENTER_X = X_BED_SIZE * 0.5f;
   static constexpr float PLOTTER_CENTER_Y = Y_BED_SIZE * 0.5f;
   static constexpr feedRate_t TEXT_TRAVEL_MM_S = MMM_TO_MMS(9000);
@@ -40,7 +46,7 @@ namespace {
   };
 
   struct TextOptions {
-    char text[65];
+    char text[PARAGRAPH_BUF + 1];
     uint8_t font;
     uint8_t align;
     uint8_t rotation;
@@ -152,7 +158,7 @@ namespace {
   static uint8_t count_lines(const char *p) {
     uint8_t lines = 1;
     for (; *p; ++p) if (*p == '\n') ++lines;
-    return _MIN(lines, uint8_t(4));
+    return _MIN(lines, uint8_t(PARAGRAPH_MAX_LINES));
   }
 
   static void measure_block(const TextOptions &opt, const float cell, TextLayout &layout) {
@@ -335,7 +341,7 @@ namespace {
     for (char *p = parser.string_arg; *p && out < size - 1; ++p) {
       char c = *p;
       if (c == '|' || c == '\r' || c == '\n') {
-        if (lines < 4 && out && dst[out - 1] != '\n') {
+        if (lines < PARAGRAPH_MAX_LINES && out && dst[out - 1] != '\n') {
           dst[out++] = '\n';
           ++lines;
         }
@@ -350,13 +356,84 @@ namespace {
     return out > 0;
   }
 
+  // Read a paragraph from an SD card text file, e.g. M752 N"PLOT.TXT".
+  static bool text_from_file(char *dst, const size_t size) {
+    if (!parser.seenval('N') || !parser.string_arg[0]) return false;
+    card.openFileRead(parser.string_arg);
+    if (!card.isFileOpen()) {
+      SERIAL_ERROR_MSG("M752: SD file not found: ", parser.string_arg);
+      return false;
+    }
+    uint8_t out = 0, lines = 1;
+    while (out < size - 1) {
+      const int c = card.get();
+      if (c < 0) break;
+      const char ch = (char)c;
+      if (ch == '\r' || ch == '\n') {
+        if (lines < PARAGRAPH_MAX_LINES && out && dst[out - 1] != '\n') {
+          dst[out++] = '\n';
+          ++lines;
+        }
+        continue;
+      }
+      if (ch == '"' || ch == '\\') dst[out++] = '\'';
+      else if (WITHIN(ch, 'a', 'z')) dst[out++] = ch - 32;
+      else if (WITHIN(ch, ' ', 'Z')) dst[out++] = ch;
+    }
+    card.closefile();
+    while (out && dst[out - 1] == '\n') --out;
+    dst[out] = '\0';
+    return out > 0;
+  }
+
+  // Wrap lines so none exceed the drawable width, breaking at word boundaries.
+  static void wrap_paragraph(TextOptions &opt) {
+    char buf[PARAGRAPH_BUF + 32];
+    const float cell = constrain(opt.size_mm, 8.0f, 44.0f) / 7.0f;
+    const bool swapped = (opt.rotation & 1);
+    const float max_w = swapped ? MAX_DRAW_H : MAX_DRAW_W;
+    uint8_t lines = 1, out = 0, last_space = 0;
+    float w = 0.0f;
+
+    for (const char *p = opt.text; *p; ++p) {
+      const char c = *p;
+      if (c == '\n') {
+        buf[out++] = '\n';
+        if (++lines > PARAGRAPH_MAX_LINES) break;
+        w = 0.0f; last_space = 0;
+        continue;
+      }
+      const float cw = char_advance(c, cell, opt.letter_spacing_mm);
+      if (w + cw > max_w) {
+        if (last_space) {
+          buf[last_space - 1] = '\n';   // last space becomes the line break
+          out = last_space;             // drop trailing space
+          if (++lines > PARAGRAPH_MAX_LINES) break;
+          w = 0.0f; last_space = 0;
+        }
+        else if (++lines > PARAGRAPH_MAX_LINES)
+          break;
+        else {
+          buf[out++] = '\n';
+          w = 0.0f; last_space = 0;
+        }
+      }
+      buf[out++] = c;
+      w += cw;
+      if (c == ' ') last_space = out;
+    }
+    buf[out] = '\0';
+    strcpy(opt.text, buf);
+  }
+
   static void report_text_usage() {
     SERIAL_ECHOLNPGM("M752 centered text writer:");
     SERIAL_ECHOLNPGM("  M752 F0 S18 A1 W1 L120 R0 M0 \"HELLO|PLOTTER\"");
+    SERIAL_ECHOLNPGM("  M752 N\"PLOT.TXT\"  reads a paragraph from an SD card text file");
     SERIAL_ECHOLNPGM("  F0 Vector, F1 Block, F2 Outline, F3 Italic");
     SERIAL_ECHOLNPGM("  A0 left, A1 center, A2 right; W letter spacing; L line spacing percent");
     SERIAL_ECHOLNPGM("  R0..3 rotate quarter turns; M1 mirror; P1 dry run; B1 frame only");
-    SERIAL_ECHOLNPGM("  D1..D6 built-in text demos. Drawings auto-fit inside 200x200.");
+    SERIAL_ECHOLNPGM("  D1..D6 built-in text demos. Text wraps and auto-fits inside 200x200.");
   }
 }
 
@@ -383,10 +460,15 @@ void GcodeSuite::M752() {
     if (!parser.seenval('F')) opt.font = (demo - 1) % FONT_COUNT;
     if (!parser.seenval('S')) opt.size_mm = demo == 3 ? 22.0f : 20.0f;
   }
+  else if (parser.seenval('N')) {
+    if (!text_from_file(opt.text, sizeof(opt.text))) return;
+  }
   else if (!text_from_parser(opt.text, sizeof(opt.text))) {
     report_text_usage();
     return;
   }
+
+  wrap_paragraph(opt);
 
   opt.font = _MIN(opt.font, uint8_t(FONT_COUNT - 1));
   opt.align = _MIN(opt.align, uint8_t(2));

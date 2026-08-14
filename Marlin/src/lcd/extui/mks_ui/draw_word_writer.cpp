@@ -33,6 +33,7 @@ enum {
   ID_WORD_FRAME,
   ID_WORD_DRY,
   ID_WORD_WRITE,
+  ID_WORD_PARA,
   ID_WORD_RETURN
 };
 
@@ -63,8 +64,8 @@ const char *plotter_text_get() {
   return plotter_text;
 }
 
-static lv_obj_t *text_button(const char *text, const lv_coord_t x, const lv_coord_t y, const int id, lv_event_cb_t cb) {
-  lv_obj_t *btn = lv_btn_create(scr, x, y, 106, 50, cb, id, &style_para_value);
+static lv_obj_t *text_button(const char *text, const lv_coord_t x, const lv_coord_t y, const int id, lv_event_cb_t cb, const lv_coord_t w = 106) {
+  lv_obj_t *btn = lv_btn_create(scr, x, y, w, 50, cb, id, &style_para_value);
   lv_obj_t *label = lv_label_create_empty(btn);
   lv_label_set_text(label, text);
   lv_obj_align(label, btn, LV_ALIGN_CENTER, 0, 0);
@@ -126,6 +127,20 @@ static uint8_t longest_line_chars() {
   return longest;
 }
 
+static void queue_paragraph_write() {
+  char cmd[MAX_CMD_SIZE];
+  snprintf_P(cmd, sizeof(cmd), PSTR("M752 F%u S%u A%u N\"PLOT.TXT\""),
+    plotter_font_index,
+    size_values[plotter_size_index],
+    plotter_align_index
+  );
+  if (!queue.enqueue_one(cmd)) {
+    ui.set_status(F("Queue busy"));
+    return;
+  }
+  ui.set_status(F("Paragraph queued; homing first"));
+}
+
 static void event_handler(lv_obj_t *obj, lv_event_t event) {
   if (event != LV_EVENT_RELEASED) return;
 
@@ -161,6 +176,10 @@ static void event_handler(lv_obj_t *obj, lv_event_t event) {
 
     case ID_WORD_WRITE:
       queue_text_write(false, false);
+      break;
+
+    case ID_WORD_PARA:
+      queue_paragraph_write();
       break;
 
     case ID_WORD_RETURN:
@@ -204,10 +223,12 @@ void lv_draw_word_writer() {
   snprintf_P(line, sizeof(line), PSTR("Align\n%s"), align_names[plotter_align_index]);
   text_button(line, x[3], 116, ID_WORD_ALIGN, event_handler);
 
-  text_button("Frame", x[0], 184, ID_WORD_FRAME, event_handler);
-  text_button("Dry Run", x[1], 184, ID_WORD_DRY, event_handler);
-  text_button("Write", x[2], 184, ID_WORD_WRITE, event_handler);
-  text_button(common_menu.text_back, x[3], 184, ID_WORD_RETURN, event_handler);
+  static const lv_coord_t x5[5] = { 12, 100, 188, 276, 364 };
+  text_button("Frame", x5[0], 184, ID_WORD_FRAME, event_handler, 86);
+  text_button("Dry Run", x5[1], 184, ID_WORD_DRY, event_handler, 86);
+  text_button("Write", x5[2], 184, ID_WORD_WRITE, event_handler, 86);
+  text_button("Para SD", x5[3], 184, ID_WORD_PARA, event_handler, 86);
+  text_button(common_menu.text_back, x5[4], 184, ID_WORD_RETURN, event_handler, 86);
 
   lv_android_home_indicator(scr);
 }
