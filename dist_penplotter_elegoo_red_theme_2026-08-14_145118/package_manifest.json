@@ -1,0 +1,22 @@
+{
+    "package":  "dist_penplotter_elegoo_red_theme_2026-08-14_145118",
+    "created":  "2026-08-14T14:51:18",
+    "environment":  "mks_robin_nano_v1_3_f4",
+    "firmware":  "elegoo.bin",
+    "firmware_sha256":  "CA52B9F8B087368C7279D581F8B0A1924995B29171A98342EC8BBE9C7EFC725C",
+    "firmware_size":  487168,
+    "bed_mm":  "200x200",
+    "notes":  [
+                  "Pen plotter only",
+                  "Z axis is pen lift",
+                  "Home X/Y before plotter actions",
+                  "Soft limits enabled",
+                  "M750 embedded demos",
+                  "M752 text writer",
+                  "M753 generated art",
+                  "Simplified UI: flat plotter hub, no nested tool screen",
+                  "Demo gallery is a flat list with no categories",
+                  "Word writer and art screens trimmed to core options",
+                  "Elegoo red theme: red header bar, red accents, dark surfaces"
+              ]
+}

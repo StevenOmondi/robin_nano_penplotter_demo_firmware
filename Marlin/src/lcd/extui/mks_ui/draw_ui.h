@@ -26,14 +26,14 @@
 #include <stdint.h>
 #include <string.h>
 
-// Android-inspired plotter UI palette
+// Elegoo-inspired plotter UI palette (dark surfaces + Elegoo red accents)
 #undef LV_COLOR_BACKGROUND
 #define ANDROID_BG_COLOR             LV_COLOR_MAKE(0x12, 0x14, 0x1A)
-#define ANDROID_HEADER_COLOR         LV_COLOR_MAKE(0x0B, 0x0D, 0x12)
+#define ANDROID_HEADER_COLOR         LV_COLOR_MAKE(0xE6, 0x00, 0x12)   // Elegoo red
 #define ANDROID_SURFACE_COLOR        LV_COLOR_MAKE(0x1C, 0x1F, 0x28)
 #define ANDROID_SURFACE_ALT_COLOR    LV_COLOR_MAKE(0x27, 0x2B, 0x36)
-#define ANDROID_ACCENT_COLOR         LV_COLOR_MAKE(0x3D, 0xDC, 0x84)
-#define ANDROID_ACCENT_DARK_COLOR    LV_COLOR_MAKE(0x1F, 0x8E, 0x4A)
+#define ANDROID_ACCENT_COLOR         LV_COLOR_MAKE(0xE6, 0x00, 0x12)   // Elegoo red
+#define ANDROID_ACCENT_DARK_COLOR    LV_COLOR_MAKE(0x99, 0x00, 0x0C)   // darker red
 #define ANDROID_TEXT_COLOR           LV_COLOR_MAKE(0xF4, 0xF7, 0xFB)
 #define ANDROID_MUTED_TEXT_COLOR     LV_COLOR_MAKE(0x9A, 0xA4, 0xB2)
 

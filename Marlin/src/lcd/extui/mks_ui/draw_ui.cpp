@@ -335,7 +335,7 @@ void tft_style_init() {
   style_android_accent.body.main_color   = ANDROID_ACCENT_COLOR;
   style_android_accent.body.grad_color   = ANDROID_ACCENT_COLOR;
   style_android_accent.body.border.color = ANDROID_ACCENT_DARK_COLOR;
-  style_android_accent.text.color        = ANDROID_HEADER_COLOR;
+  style_android_accent.text.color        = ANDROID_TEXT_COLOR;
 
   lv_style_copy(&style_android_muted, &lv_style_scr);
   style_android_muted.body.main_color   = LV_COLOR_BACKGROUND;
@@ -446,7 +446,7 @@ void tft_style_init() {
   style_para_back.body.grad_color   = TFT_LV_PARA_BACK_BODY_COLOR;
   style_para_back.body.shadow.width = 0;
   style_para_back.body.radius       = 8;
-  style_para_back.text.color        = ANDROID_HEADER_COLOR;
+  style_para_back.text.color        = ANDROID_TEXT_COLOR;
   style_para_back.text.font         = &TERN(HAS_SPI_FLASH_FONT, gb2312_puhui32, lv_font_roboto_22);
 
   lv_style_copy(&style_btn_rel, &lv_style_plain);
